@@ -26,6 +26,6 @@ Both `tile` and `grid` requests via `GetAsync()` may also use an `index` paramet
 
 | `get*()` tilelive API   | `getAsync()` API  |
 |-----------------------|-------------------|
-|`getTile(z, x, y, callback(err, tile, headers))`|`Promise{tile, headers} getAsync({z, x, y})` or <br>`Promise{tile, headers} getAsync({type:'tile', z, x, y})`|
-|`getGrid(z, x, y, callback(err, grid, headers))`|`Promise{grid, headers} getAsync({type:'grid', z, x, y})`|
-|`getInfo(callback(err, info))`         |`Promise{info} getAsync({type:'info'})`|
+|`getTile(z, x, y,`<br>&nbsp;&nbsp;`callback<err, tile, headers>)`|`Promise{tile, headers} getAsync({z, x, y})`<br> or <br>`Promise{tile, headers} getAsync(`<br>&nbsp;&nbsp;`{type:'tile', z, x, y})`|
+|`getGrid(z, x, y,`<br>&nbsp;&nbsp;`callback<err, grid, headers>)`|`Promise{grid, headers} getAsync(`<br>&nbsp;&nbsp;`{type:'grid', z, x, y})`|
+|`getInfo(callback<err, info>)`         |`Promise{info} getAsync({type:'info'})`|
