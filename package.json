@@ -1,0 +1,25 @@
+{
+  "name": "tilelive-promise",
+  "version": "1.0.0",
+  "description": "Adds an extended Promise-based interface to the existing tilelive components, or exposes new components to older tilelive systems.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": "kartotherian/tilelive-promise",
+  "keywords": [
+    "tilelive",
+    "promise",
+    "promisify"
+  ],
+  "author": "Yuri Astrakhan <YuriAstrakhan@gmail.com>",
+  "license": "MIT",
+  "bugs": "https://github.com/kartotherian/tilelive-promise/issues",
+  "homepage": "https://github.com/kartotherian/tilelive-promise#readme",
+  "dependencies": {
+    "quadtile-index": "^0.0.6"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  }
+}
