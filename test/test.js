@@ -54,6 +54,43 @@ function testModern(inst, expected, opts) {
 }
 
 
+describe('param validation', () => {
+    let invalidArg = err => err.message === 'Invalid source argument';
+    it('undefined', () => assert.throws(() => tp(), invalidArg));
+    it('null', () => assert.throws(() => tp(null), invalidArg));
+
+    function dummy(func, isPrototype) {
+        return () => {
+            function Dummy() {
+            }
+
+            ['getAsync', 'getTile', 'getGrid', 'getInfo']
+                .filter(f => f !== func)
+                .map(f => Dummy.prototype[f] = () => 42);
+
+            let inst = new Dummy();
+            if (isPrototype) {
+                Dummy.prototype[func] = 42;
+            } else {
+                inst[func] = 42;
+            }
+            return tp(inst);
+        };
+    }
+
+    let invalidSrc = err => err.message === 'Argument is not a valid Tilelive instance';
+    
+    it('getAsync', () => assert.throws(() => tp(new function () {}), invalidSrc));
+    it('getAsync', () => assert.throws(dummy('getAsync'), invalidSrc));
+    it('getAsync prot', () => assert.throws(dummy('getAsync', true), invalidSrc));
+    it('getTile', () => assert.throws(dummy('getTile'), invalidSrc));
+    it('getTile prot', () => assert.throws(dummy('getTile', true), invalidSrc));
+    it('getGrid', () => assert.throws(dummy('getGrid'), invalidSrc));
+    it('getGrid prot', () => assert.throws(dummy('getGrid', true), invalidSrc));
+    it('getInfo', () => assert.throws(dummy('getInfo'), invalidSrc));
+    it('getInfo prot', () => assert.throws(dummy('getInfo', true), invalidSrc));
+});
+
 describe('legacy error calls', () => {
     it('err on legacy getTile() from legacy obj', () => testLegacy(new Legacy(true), {err: 'tile'}, 'getTile', 0, 0, 0));
     it('err on legacy getGrid() from legacy obj', () => testLegacy(new Legacy(true), {err: 'grid'}, 'getGrid', 0, 0, 0));

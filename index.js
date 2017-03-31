@@ -2,7 +2,7 @@
 
 let quadtile = require('quadtile-index');
 
-function injectNew(source) {
+function injectAsync(source) {
     source.getAsync = opts => {
         return new Promise((resolve, reject) => {
             let x = opts.x, y = opts.y;
@@ -49,10 +49,9 @@ function injectNew(source) {
             }
         });
     };
-    return source;
 }
 
-function injectOld(source) {
+function injectLegacy(source) {
     source.getTile = (z, x, y, cb) => {
         source.getAsync({z: z, x: x, y: y}).then(
             data => cb(undefined, data.tile, data.headers),
@@ -68,7 +67,6 @@ function injectOld(source) {
             data => cb(undefined, data.info),
             err => cb(err));
     };
-    return source;
 }
 
 /**
@@ -76,16 +74,33 @@ function injectOld(source) {
  * @param source A tilelive instance
  */
 module.exports = function(source) {
-    if (!source ||
-        (source.get !== undefined && typeof source.get !== 'function') ||
-        (source.getTile !== undefined && typeof source.getTile !== 'function')
+    if (!source) {
+        throw new Error('Invalid source argument');
+    }
+    const isLegacy =
+        typeof source.getTile === 'function' &&
+        typeof source.getGrid === 'function' &&
+        typeof source.getInfo === 'function';
+    const isMissingLegacy =
+        source.getTile === undefined &&
+        source.getGrid === undefined &&
+        source.getInfo === undefined;
+
+
+    const isAsync = typeof source.getAsync === 'function';
+    const isMissingAsync = source.getAsync === undefined;
+
+    if ((isMissingAsync && isMissingLegacy) ||
+        (!isLegacy && !isMissingLegacy) ||
+        (!isAsync && !isMissingAsync)
     ) {
         throw new Error('Argument is not a valid Tilelive instance');
     }
-    if (source.getTile && source.get) {
-        // nothing to do
-        return source;
-    }
 
-    return source.getTile ? injectNew(source) : injectOld(source);
+    if (isMissingLegacy) {
+        injectLegacy(source);
+    } else if (isMissingAsync) {
+        injectAsync(source);
+    }
+    return source;
 };
