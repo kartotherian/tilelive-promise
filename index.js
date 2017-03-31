@@ -19,7 +19,10 @@ function injectNew(source) {
                 return;
             }
             if (opts.index !== undefined && x === undefined && y === undefined) {
-                [x, y] = quadtile.indexToXY(opts.index);
+                // todo late ode6+ -- [x, y] = ...
+                let xy = quadtile.indexToXY(opts.index);
+                x = xy[0];
+                y = xy[1];
             }
             switch (opts.type) {
                 case undefined:
