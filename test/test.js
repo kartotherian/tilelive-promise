@@ -24,8 +24,9 @@ Modern.prototype.getAsync = function(o) {
     return this._legacy.getAsync(o);
 };
 
-function testLegacy(inst, expected, func, ...args) {
+function testLegacy(inst, expected, func /*, ...args*/) {
     return new Promise((accept, reject) => {
+        let args = Array.prototype.slice.call(arguments, 3);
         args.push((err, data, hdrs) => {
             try {
                 let res = {};
@@ -39,7 +40,8 @@ function testLegacy(inst, expected, func, ...args) {
             }
         });
         let inst2 = tp(inst);
-        inst2[func](...args);
+        // inst2[func](...args);
+        inst2[func].apply(inst2, args);
     });
 }
 
