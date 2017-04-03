@@ -1,6 +1,6 @@
 {
   "name": "tilelive-promise",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Adds an extended Promise-based interface to the existing tilelive components, or exposes new components to older tilelive systems.",
   "main": "index.js",
   "scripts": {
