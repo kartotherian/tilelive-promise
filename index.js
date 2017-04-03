@@ -77,29 +77,25 @@ module.exports = function(source) {
     if (!source) {
         throw new Error('Invalid source argument');
     }
-    const isLegacy =
-        typeof source.getTile === 'function' &&
-        typeof source.getGrid === 'function' &&
-        typeof source.getInfo === 'function';
-    const isMissingLegacy =
+    const isBadLegacy =
+        (source.getTile !== undefined && typeof source.getTile !== 'function') ||
+        (source.getGrid !== undefined && typeof source.getGrid !== 'function') ||
+        (source.getInfo !== undefined && typeof source.getInfo !== 'function');
+    const isNoLegacy =
         source.getTile === undefined &&
         source.getGrid === undefined &&
         source.getInfo === undefined;
 
+    const isBadAsync = source.getAsync !== undefined && typeof source.getAsync !== 'function';
+    const isNoAsync = source.getAsync === undefined;
 
-    const isAsync = typeof source.getAsync === 'function';
-    const isMissingAsync = source.getAsync === undefined;
-
-    if ((isMissingAsync && isMissingLegacy) ||
-        (!isLegacy && !isMissingLegacy) ||
-        (!isAsync && !isMissingAsync)
-    ) {
+    if (isBadAsync || isBadLegacy || (isNoAsync && isNoLegacy)) {
         throw new Error('Argument is not a valid Tilelive instance');
     }
 
-    if (isMissingLegacy) {
+    if (isNoLegacy) {
         injectLegacy(source);
-    } else if (isMissingAsync) {
+    } else if (isNoAsync) {
         injectAsync(source);
     }
     return source;

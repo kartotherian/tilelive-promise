@@ -17,7 +17,6 @@ Legacy.prototype.getInfo = function (cb) {
 };
 
 function Modern(throwErr) {
-
     this._legacy = tp(new Legacy(throwErr));
 }
 Modern.prototype.getAsync = function(o) {
@@ -79,7 +78,7 @@ describe('param validation', () => {
     }
 
     let invalidSrc = err => err.message === 'Argument is not a valid Tilelive instance';
-    
+
     it('getAsync', () => assert.throws(() => tp(new function () {}), invalidSrc));
     it('getAsync', () => assert.throws(dummy('getAsync'), invalidSrc));
     it('getAsync prot', () => assert.throws(dummy('getAsync', true), invalidSrc));
