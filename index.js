@@ -5,7 +5,7 @@ let quadtile = require('quadtile-index');
 function injectAsync(source) {
     source.getAsync = opts => {
         return new Promise((resolve, reject) => {
-            let x = opts.x, y = opts.y;
+
             if (opts.type === 'info') {
                 // safety: Handle getInfo() before tile and grid because we don't want
                 // to validate index param, just in case it is used in some weird way
@@ -18,12 +18,15 @@ function injectAsync(source) {
                 });
                 return;
             }
+
+            let x = opts.x, y = opts.y;
             if (opts.index !== undefined && x === undefined && y === undefined) {
                 // todo late ode6+ -- [x, y] = ...
                 let xy = quadtile.indexToXY(opts.index);
                 x = xy[0];
                 y = xy[1];
             }
+
             switch (opts.type) {
                 case undefined:
                 case 'tile':
