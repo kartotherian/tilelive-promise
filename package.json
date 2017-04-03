@@ -4,7 +4,8 @@
   "description": "Adds an extended Promise-based interface to the existing tilelive components, or exposes new components to older tilelive systems.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "preversion": "npm test"
   },
   "repository": "kartotherian/tilelive-promise",
   "keywords": [
