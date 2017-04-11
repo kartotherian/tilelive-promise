@@ -125,24 +125,24 @@ describe('modern error calls', () => {
 });
 
 describe('modern calls', () => {
-    it('modern getAsync()     from legacy obj', () => testModern(new Legacy(), {tile:'tile:2:1:0', headers:{h:1}}, {z:2, x:1, y:0}));
-    it('modern getAsync(tile) from legacy obj', () => testModern(new Legacy(), {tile:'tile:2:1:0', headers:{h:1}}, {type:'tile', z:2, x:1, y:0}));
-    it('modern getAsync(grid) from legacy obj', () => testModern(new Legacy(), {grid:'grid:2:1:0', headers:{h:1}}, {type:'grid', z:2, x:1, y:0}));
-    it('modern getAsync(info) from legacy obj', () => testModern(new Legacy(), {info:'info'}, {type:'info'}));
+    it('modern getAsync()     from legacy obj', () => testModern(new Legacy(), {data:'tile:2:1:0', headers:{h:1}}, {z:2, x:1, y:0}));
+    it('modern getAsync(tile) from legacy obj', () => testModern(new Legacy(), {data:'tile:2:1:0', headers:{h:1}}, {type:'tile', z:2, x:1, y:0}));
+    it('modern getAsync(grid) from legacy obj', () => testModern(new Legacy(), {data:'grid:2:1:0', headers:{h:1}}, {type:'grid', z:2, x:1, y:0}));
+    it('modern getAsync(info) from legacy obj', () => testModern(new Legacy(), {data:'info'}, {type:'info'}));
 
-    it('modern getAsync()     from modern obj', () => testModern(new Modern(), {tile:'tile:2:1:0', headers:{h:1}}, {z:2, x:1, y:0}));
-    it('modern getAsync(tile) from modern obj', () => testModern(new Modern(), {tile:'tile:2:1:0', headers:{h:1}}, {type:'tile', z:2, x:1, y:0}));
-    it('modern getAsync(grid) from modern obj', () => testModern(new Modern(), {grid:'grid:2:1:0', headers:{h:1}}, {type:'grid', z:2, x:1, y:0}));
-    it('modern getAsync(info) from modern obj', () => testModern(new Modern(), {info:'info'}, {type:'info'}));
+    it('modern getAsync()     from modern obj', () => testModern(new Modern(), {data:'tile:2:1:0', headers:{h:1}}, {z:2, x:1, y:0}));
+    it('modern getAsync(tile) from modern obj', () => testModern(new Modern(), {data:'tile:2:1:0', headers:{h:1}}, {type:'tile', z:2, x:1, y:0}));
+    it('modern getAsync(grid) from modern obj', () => testModern(new Modern(), {data:'grid:2:1:0', headers:{h:1}}, {type:'grid', z:2, x:1, y:0}));
+    it('modern getAsync(info) from modern obj', () => testModern(new Modern(), {data:'info'}, {type:'info'}));
 
-    it('modern getAsync(info, badidx) from legacy obj', () => testModern(new Legacy(), {info:'info'}, {type:'info', index:-10}));
-    it('modern getAsync(info, badidx) from legacy obj', () => testModern(new Legacy(), {info:'info'}, {type:'info', index:-10}));
+    it('modern getAsync(info, badidx) from legacy obj', () => testModern(new Legacy(), {data:'info'}, {type:'info', index:-10}));
+    it('modern getAsync(info, badidx) from legacy obj', () => testModern(new Legacy(), {data:'info'}, {type:'info', index:-10}));
 
-    it('modern getAsync()     w/ idx from legacy obj', () => testModern(new Legacy(), {tile:'tile:2:1:3', headers:{h:1}}, {z:2, index:11}));
-    it('modern getAsync(tile) w/ idx from legacy obj', () => testModern(new Legacy(), {tile:'tile:2:1:3', headers:{h:1}}, {type:'tile', z:2, index:11}));
-    it('modern getAsync(grid) w/ idx from legacy obj', () => testModern(new Legacy(), {grid:'grid:2:1:3', headers:{h:1}}, {type:'grid', z:2, index:11}));
+    it('modern getAsync()     w/ idx from legacy obj', () => testModern(new Legacy(), {data:'tile:2:1:3', headers:{h:1}}, {z:2, index:11}));
+    it('modern getAsync(tile) w/ idx from legacy obj', () => testModern(new Legacy(), {data:'tile:2:1:3', headers:{h:1}}, {type:'tile', z:2, index:11}));
+    it('modern getAsync(grid) w/ idx from legacy obj', () => testModern(new Legacy(), {data:'grid:2:1:3', headers:{h:1}}, {type:'grid', z:2, index:11}));
 
-    it('modern getAsync()     w/ idx from modern obj', () => testModern(new Modern(), {tile:'tile:2:1:3', headers:{h:1}}, {z:2, index:11}));
-    it('modern getAsync(tile) w/ idx from modern obj', () => testModern(new Modern(), {tile:'tile:2:1:3', headers:{h:1}}, {type:'tile', z:2, index:11}));
-    it('modern getAsync(grid) w/ idx from modern obj', () => testModern(new Modern(), {grid:'grid:2:1:3', headers:{h:1}}, {type:'grid', z:2, index:11}));
+    it('modern getAsync()     w/ idx from modern obj', () => testModern(new Modern(), {data:'tile:2:1:3', headers:{h:1}}, {z:2, index:11}));
+    it('modern getAsync(tile) w/ idx from modern obj', () => testModern(new Modern(), {data:'tile:2:1:3', headers:{h:1}}, {type:'tile', z:2, index:11}));
+    it('modern getAsync(grid) w/ idx from modern obj', () => testModern(new Modern(), {data:'grid:2:1:3', headers:{h:1}}, {type:'grid', z:2, index:11}));
 });

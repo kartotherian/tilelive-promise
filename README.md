@@ -18,7 +18,7 @@ The new function allows to treat `get*()` as promises,
  permits additional parameter passing with each request (e.g. scaling, format, language),
  and allow non-tile data to be retrieved through the same system.
 
-Both `tile` and `grid` requests via `GetAsync()` may also use an `index` parameter instead of (x,y) coordinates. Index is a single 56bit [quadtile integer](https://github.com/kartotherian/quadtile-index#quadtile-index), allowing up to zoom 26. 
+Both `tile` and `grid` requests via `GetAsync()` may also use an `index` parameter instead of (x,y) coordinates. Index is a single 56bit [quadtile integer](https://github.com/kartotherian/quadtile-index#quadtile-index), allowing up to zoom 26.
 
 `getAsync()` returns a Promise that resolves to an object. The content of the object depends on the type.
 
@@ -26,6 +26,6 @@ Both `tile` and `grid` requests via `GetAsync()` may also use an `index` paramet
 
 | `get*()` tilelive API   | `getAsync()` API  |
 |-----------------------|-------------------|
-|`getTile(z, x, y,`<br>&nbsp;&nbsp;`callback<err, tile, headers>)`|`Promise{tile, headers} getAsync({z, x, y})`<br> or <br>`Promise{tile, headers} getAsync(`<br>&nbsp;&nbsp;`{type:'tile', z, x, y})`|
-|`getGrid(z, x, y,`<br>&nbsp;&nbsp;`callback<err, grid, headers>)`|`Promise{grid, headers} getAsync(`<br>&nbsp;&nbsp;`{type:'grid', z, x, y})`|
-|`getInfo(callback<err, info>)`         |`Promise{info} getAsync({type:'info'})`|
+|`getTile(z, x, y,`<br>&nbsp;&nbsp;`callback<err, tile, headers>)`|`Promise{data, headers} getAsync({z, x, y})`<br> or <br>`Promise{data, headers} getAsync(`<br>&nbsp;&nbsp;`{type:'tile', z, x, y})`|
+|`getGrid(z, x, y,`<br>&nbsp;&nbsp;`callback<err, grid, headers>)`|`Promise{data, headers} getAsync(`<br>&nbsp;&nbsp;`{type:'grid', z, x, y})`|
+|`getInfo(callback<err, info>)`         |`Promise{data} getAsync({type:'info'})`|

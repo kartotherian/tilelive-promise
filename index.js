@@ -13,7 +13,7 @@ function injectAsync(source) {
                     if (err) {
                         reject(err);
                     } else {
-                        resolve({info: data});
+                        resolve({data: data});
                     }
                 });
                 return;
@@ -34,7 +34,7 @@ function injectAsync(source) {
                         if (err) {
                             reject(err);
                         } else {
-                            resolve({tile: data, headers: hdrs});
+                            resolve({data: data, headers: hdrs});
                         }
                     });
                     break;
@@ -43,7 +43,7 @@ function injectAsync(source) {
                         if (err) {
                             reject(err);
                         } else {
-                            resolve({grid: data, headers: hdrs});
+                            resolve({data: data, headers: hdrs});
                         }
                     });
                     break;
@@ -57,17 +57,17 @@ function injectAsync(source) {
 function injectLegacy(source) {
     source.getTile = (z, x, y, cb) => {
         source.getAsync({z: z, x: x, y: y}).then(
-            data => cb(undefined, data.tile, data.headers),
+            data => cb(undefined, data.data, data.headers),
             err => cb(err));
     };
     source.getGrid = (z, x, y, cb) => {
         source.getAsync({type: 'grid', z: z, x: x, y: y}).then(
-            data => cb(undefined, data.grid, data.headers),
+            data => cb(undefined, data.data, data.headers),
             err => cb(err));
     };
     source.getInfo = (cb) => {
         source.getAsync({type: 'info'}).then(
-            data => cb(undefined, data.info),
+            data => cb(undefined, data.data),
             err => cb(err));
     };
 }
